@@ -20,9 +20,9 @@ This ``VstHostSwitcher.ini`` file has the following structure:
 
 Definitions for the x86 and x64 VstPlugin folder paths:
 
-> \[VstPluginFolderPaths\]
-> x86=\[enter your x86 VST plugins path here\]
-> x64=\[enter your x64 VST plugins path here\]
+> \[VstPluginFolderPaths\]  
+> x86=\[enter your x86 VST plugins path here\]  
+> x64=\[enter your x64 VST plugins path here\]  
 
 Notice that if no path is defined, the script will try to get it from the MS Widnwos registry or use the following default values rspectively for the x86 and x64 default VST plugin path location:
 
