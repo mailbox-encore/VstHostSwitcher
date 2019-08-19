@@ -24,7 +24,7 @@ The second ``VstHostSwitcher-Build.ps1`` script is used as an example file to bu
 Please see the ``Building an executable with the scripts`` section at the end of this file for more details.
 
 <span style="color:red">**IMPORTANT**</span>
-Please edit the ``VstHostSwitcher.ps1`` script at line 10 to set your own executable path location. 
+Please edit the ``VstHostSwitcher.ps1`` script at line 10 to set your own executable path location.
 This is the place where you will store the ``VstHostSwitcher.exe`` executable and its associated ``VstHostSwitcher.ini`` file as otherwise the ``VstHostSwitcher.exe`` executable file won't be able to found the ``VstHostSwitcher.ini``. The current script location cannot be used at runtime as it becomes the VST plugin ``.dll`` file location unfortunately... 
 I could not found a way to fix this problem therefore any sugestions will be greatly appreciated. Thanks in advance for any help fixing this problem.  
 

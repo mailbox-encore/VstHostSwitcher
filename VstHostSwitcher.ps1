@@ -8,24 +8,26 @@
 # VST .dll file and therfore the .ini file could not be found.
 #############################################################################################
 $applicationExePath="Enter the full path to VstSwitcher.exe here please"
-
+#$applicationExePath="E:\Hosts\VstHostSwitcher"
 # Uncomment the following line to debug 
 #$Debug=$true
-if ($Debug -and !$arguments) {
+if ($Debug) {
   $VerbosePreference = "Continue" 
+  if (!$arguments){
   #$arguments = "E:\VstPlugins\U-HE\ACE.dll"
   #$arguments="E:\VstPlugins.x64\U-HE\ACE(x64).dll"
  
- #$arguments = "E:\Vstplugins\VK-1\VK-1 Viking Synthesizer.dll"
+  $arguments = "E:\Vstplugins\Obxd.dll"
   #$arguments = "E:\Vstplugins.x64\Boost11\Boost11_64.dll"
-  #$arguments = "E:\VstPlugins\U-HE\ACE.dlna"
+  #$arguments = "E:\Vstplugins\U-HE\ACE.dlna"
+  }
+  Write-Verbose "arguments=[$arguments]"
   $applicationExePath="E:\Hosts\VstHostSwitcher"
   if (!(Test-Path $applicationExePath)) {
     # USE current location during development
     $applicationExePath=Get-Location
   }
   Write-Verbose "applicationExePath=[$applicationExePath]"
-  Write-Verbose "arguments=[$arguments]"
 }
 
 if (!$arguments -or !$arguments.EndsWith(".dll")) {
@@ -151,7 +153,7 @@ if (!$vstPluginsPath_x64) {
 Write-Verbose "vstPluginsPath_x64=$vstPluginsPath_x64"
 
 # 3) Do the VST Host application switching work here...
-if ($arguments.StartsWith($vstPluginsPath_x86)) {
+if ($arguments.StartsWith($vstPluginsPath_x86, $true, $null)) {
   Write-Verbose "Launching x86 VST host using [$vstHostApplicationsPaths_x86] application."
   & $vstHostApplicationsPaths_x86 $arguments
 }
