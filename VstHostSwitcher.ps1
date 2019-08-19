@@ -9,7 +9,7 @@ Add-Type -AssemblyName PresentationCore,PresentationFramework
 
 $VerbosePreference = "Continue" #"SilentlyContinue"
 # for debug only
-$Debug=$true
+# $Debug=$true
 if ($Debug -and !$arguments) {
   #$arguments = "E:\VstPlugins\U-HE\ACE.dll"
   #$arguments="E:\VstPlugins.x64\U-HE\ACE(x64).dll"
