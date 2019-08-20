@@ -2,36 +2,42 @@
 
 ## Description
 
-The purpose of these scripts is to simplify the automatic switching between 32 and 64 bits VST plugins hosts installed on your MS Windows PC.
+The purpose of these [PowerShell scripts](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) is to simplify the automatic switching between 32 and 64 bits VST plugins hosts installed on your MS Windows PC.
 
-If (as me)  you you have both x86 and x64 version of VST PLugins and you do not always need to launch a 'heavy' DAW to open them and do soem knowb tweaking to create new sound presets, you may already use a VST plugin host like the one of following:
+If (as me)  you you have both x86 and x64 version of VST PLugins and you do not always need to launch a 'heavy' DAW to open them and do 'knob tweaking' to create new sound presets, you may already use a VST plugin host like the one of following:
 
 > - [Tone 2 Nanohost](https://www.tone2.com/nanohost.html)
 > - [Image-Line MiniHostModular](https://forum.image-line.com/viewtopic.php?f=1919&t=123031)
 > - [Hermannseib vsthost](http://www.hermannseib.com/english/vsthost.htm)
 
-The main idea was to create an executable that will be associated with ``.dll`` files in the MS Windows file explorer so I could double click any vst.dll file and it will be open quickly in my preferred VST host indenpendently to the fact that the .dll is a 32 or 64 bit VST Plugin.
+The main idea was to create an executable that will be associated with ``.dll`` files extension in the MS Windows file explorer so I could double click any ``vst.dll`` file and it will be quickly open in my preferred VST host independently to the fact that the ``.dll`` file is a 32 or 64 bit VST Plugin.
+
 In order to do this I needed:
 
 - [A script which contains the logic to choose between teh 32 or 64 bits VST host.](#ANCHOR_SCRIPTS)
-- [A way to allow custom settings](#ANCHOR_SETTINGS)
+- [A way to specify custom PATH settings](#ANCHOR_SETTINGS)
 - [A tool to compile this script to a MS Widnows executable file.](#ANCHOR_EXE)
 - [Associate this executable with any .dll file.](#ANCHOR_FILE_ASSOCIATION)
 
 <a name="ANCHOR_SCRIPTS"></a>
 
-## Why so many .ps1  script files
+## Why two .ps1  script files
 
 The ``VstHostSwitcher.ps1`` script is containing the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.
-The second ``VstHostSwitcher-Build.ps1`` script is used as an example file to build the ``VstHostSwitcher.ps1`` file to an executable.
-Please see the ``Building an executable with the scripts`` section at the end of this file for more details.
+The second ``VstHostSwitcher-Build.ps1`` script is used as an example file to **build** the ``VstHostSwitcher.ps1`` file to an executable.
+Please see the [Building an executable with the scripts section](#ANCHOR_EXE) at the end of this file for more details.
 
 <span style="color:red">**IMPORTANT**</span>
-Please edit the ``VstHostSwitcher.ps1`` script at line 10 to set your own executable path location.
-This is the place where you will store the ``VstHostSwitcher.exe`` executable and its associated ``VstHostSwitcher.ini`` file as otherwise the ``VstHostSwitcher.exe`` executable file won't be able to found the ``VstHostSwitcher.ini``. The current script location cannot be used at runtime as it becomes the VST plugin ``.dll`` file location unfortunately...
-I could not found a way to fix this problem therefore any sugestions will be greatly appreciated. Thanks in advance for any help fixing this problem.  
-
+Please edit the ``VstHostSwitcher.ps1 $applicationExePath`` variable at line 10 to set the path location where you will install the built executable.
 ![Important-Warning-Image](images/Important-Warning.png)
+
+This is the folder path where you will store the ``VstHostSwitcher.exe`` executable and its associated ``VstHostSwitcher.ini`` file as otherwise the ``VstHostSwitcher.exe`` executable file won't be able to found the ``VstHostSwitcher.ini``.
+in the sample below I have deployed / copied these two files in the ``E:\Hosts\VstHostSwitcher`` folder:
+
+![ExeApplicationPath-Image](images/ExeApplicationPath.png)
+
+The current script location cannot be used at runtime as it becomes the VST plugin ``.dll`` file location unfortunately...
+I could not found a way to fix this problem therefore any sugestions will be greatly appreciated. Thanks in advance for any help fixing this problem.  
 
 <a name="ANCHOR_SETTINGS"></a>
 
@@ -92,7 +98,7 @@ I personnally add it to the VST host applications folder but you could copy it a
 
 <a name="ANCHOR_FILE_ASSOCIATION"></a>
 
-## Associating the ``VstHostSwitcher.exe`` executable with .dll file extension
+## Associating the VstHostSwitcher.exe executable with .dll file extension
 
 Now that we have built the ``VstHostSwitcher.exe`` executable we have to associate it with the VST.dll file extension.
 I agree that not all ``.dll`` files are VST plugins but the host files I know cannot open ``.vst3`` files unfortunately.
@@ -100,6 +106,6 @@ Here is how to do it from the MS Widnows file explorer:
 
 ![DllFileExtensionAssociation-Image](images/DllFileExtensionAssociation.png)
 
-If everything when well, it shoudl open the selected ``.dll``.
+If everything when well, it should open the selected ``.dll``.
 
 Hope this help...
