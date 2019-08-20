@@ -4,7 +4,7 @@
 
 The purpose of these scripts is to simplify the automatic switching between 32 and 64 bits VST plugins hosts installed on your MS Windows PC.
 
-If (as me)  you you have both x86 and x64 version of VST PLugins and you do not always need to launch a 'heavy' DAW to open them and do soem knowb tweaking to create new sound presets, you may already use a VST plugin host like the one of following: 
+If (as me)  you you have both x86 and x64 version of VST PLugins and you do not always need to launch a 'heavy' DAW to open them and do soem knowb tweaking to create new sound presets, you may already use a VST plugin host like the one of following:
 
 > - [Tone 2 Nanohost](https://www.tone2.com/nanohost.html)
 > - [Image-Line MiniHostModular](https://forum.image-line.com/viewtopic.php?f=1919&t=123031)
