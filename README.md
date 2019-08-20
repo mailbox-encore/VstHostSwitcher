@@ -10,7 +10,7 @@ If (as me) you have both x86 and x64 version of VST plugins and you do not alway
 > - [Image-Line MiniHostModular](https://forum.image-line.com/viewtopic.php?f=1919&t=123031)
 > - [Hermannseib vsthost](http://www.hermannseib.com/english/vsthost.htm)
 
-The main idea is to create an executable that will be associated with ``.dll`` files extension in the MS Windows file explorer so I could double click any ``vst.dll`` file and it will be quickly open in my preferred VST host independently to the fact that the ``.dll`` file is a 32 or 64 bit VST Plugin.
+The main idea was to create an executable that will be associated with ``.dll`` files extension in the MS Windows file explorer so I could double click any ``vst.dll`` file and it will be quickly open in my preferred VST host *independently to the fact that the ``.dll`` file is a 32 or 64 bit VST Plugin*.
 
 In order to do this I needed:
 
