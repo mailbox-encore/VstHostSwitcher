@@ -2,7 +2,7 @@
 
 ## Description
 
-The purpose of these [PowerShell scripts](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) is to simplify the automatic switching between 32 and 64 bits VST plugins hosts installed on your MS Windows PC.
+The purpose of these small [PowerShell scripts](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) is to simplify the automatic switching between 32 and 64 bits VST plugins hosts installed on my MS Windows PC.
 
 If you have both x86 and x64 version of VST plugins and you do not always need to launch a 'heavy' DAW to open them and do some 'knob tweaking' to create new sound presets, you may already use a VST plugin host application like the followings ones:
 
@@ -10,8 +10,7 @@ If you have both x86 and x64 version of VST plugins and you do not always need t
 - [Image-Line MiniHostModular](https://forum.image-line.com/viewtopic.php?f=1919&t=123031)
 - [Hermann Seib vsthost](http://www.hermannseib.com/english/vsthost.htm)
 
-The problem is that 32 bits VST plugins cannot be open with a 64 bits VST host and vice versa. Therfore, the idea was to create an executable which could do the 32/64 bits VST host switching automatically for me and associate it with the ``.dll`` files extension in the MS Windows file explorer. This way, simply by double clicking any ``vst.dll`` file I could quickly open it in my preferred VST host **independently to the fact that the .dll file is a 32 or 64 bit VST Plugin**.
-
+The problem is that 32 bits VST plugins cannot be open with a 64 bits VST host and vice versa. Therfore, the idea was to create an executable which could do the 32/64 bits VST host switching automatically for me and associate it with the ``.dll`` files extension in the MS Windows file explorer. This way, simply by double clicking any ``vst.dll`` file I could quickly open it in my preferred VST host **independently to the fact that the .dll file is a 32 or 64 bit VST Plugin**:
 ![VstHostSwitcher-animated-Image](images/VstHostSwitcher.gif)
 
 In order to do this I needed:
@@ -25,9 +24,10 @@ In order to do this I needed:
 
 ## Why two .ps1  script files
 
-The ``VstHostSwitcher.ps1`` script is containing the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.  
-The second script (``VstHostSwitcher-Build.ps1``) is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable.  
-Please see the [Building an executable with the scripts section](#ANCHOR_EXE) topic at the end of this page for more details.
+The ``VstHostSwitcher-Build.ps1`` script is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable.  
+I will give more details about the use of this script to build an executable [later on at the end of this page](#ANCHOR_EXE).  
+
+The ``VstHostSwitcher.ps1`` script is containing all the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.  
 
 **IMPORTANT**  
 Please edit the ``$applicationExePath`` variable at line 10 of the ``VstHostSwitcher.ps1`` script to set the path location where you will copy/install the ``VstHostSwitcher-Build.exe`` executable built from the script.
