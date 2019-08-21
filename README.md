@@ -43,7 +43,7 @@ The _current script location_ cannot be guessed/used at runtime as this script l
 
 ## Paths customization
 
-It is possible to define your own directory structure to store your VST plugins and host location folders.
+It is possible to define your own directory structure to store your VST plugins and host location folders.  
 These settings will be stored in the ``VstHostSwitcher.ini`` file.  
 As mentioned previously, **the .ini file must be stored in the same directory as the  ``VstHostSwitcher.exe`` executable**.  
 
@@ -85,34 +85,35 @@ Therefore, I am strongly advising you to fill the ``VstHostSwitcher.ini`` file w
 
 <a name="ANCHOR_EXE"></a>
 
-## Building an executable with the scripts
+## Building an executable from the VstHostSwitcher.ps1 script
 
 Now that we have updated the ``VstHostSwitcher.ini`` file with our own settings, we can try to build the executable.  
-We will need the [ps2exe script that you can download here](https://gallery.technet.microsoft.com/scriptcenter/PS2EXE-GUI-Convert-9b4b0493) for this task.
+We will need the **ps2exe script** that you can [download here](https://gallery.technet.microsoft.com/scriptcenter/PS2EXE-GUI-Convert-9b4b0493) for this task.
 
 Once you have downloaded and extracted the zip file (i.e. for me in the _E:\Dev\Tools\PS2EXE_ directory) I am advising you to add the folder location where you unzip the file to your PATH environment variable. This way, you can simply run the ``VstHostSwitcher-Build.ps1`` script without having to modify it.  
 Here is how to do so from the MS Windows file explorer:
 
 ![SetEnv-Image](images/SetEnv.png)
 
-Notice that you can also specify your own personal icon file name if needed.  
-I found [the one I am using here](https://icon-icons.com/)...
-
 Alternatively, you can also simply prefix the ``ps2exe.ps1`` string with the path to the ``ps2exe.ps1`` script location in the ``VstHostSwitcher-Build.ps1`` script like in this example with the _E:\Dev\Tools\PS2EXE_ path as it is the place where I installed it:  
 > ``E:\Dev\Tools\PS2EXE\ps2exe.ps1 VstHostSwitcher.ps1 VstHostSwitcher.exe -verbose -noConsole -iconfile VstHostSwitcher.ico``
 
-Then, simply run the ``VstHostSwitcher-Build.ps1`` script to create the ``VstHostSwitcher.exe`` executable file.
-You can launch this script using the PowerShell window like this:
+Notice that you can also specify your own personal icon file name if needed using the ``-iconfile`` argument.  
+I found [the one I am using here](https://icon-icons.com/)...
+
+Then, simply run the ``VstHostSwitcher-Build.ps1`` script to create the ``VstHostSwitcher.exe`` executable file.  
+You can launch this script using the PowerShell window like this:  
 ![PowershellExe1-Image](images/PowershellExe1.png)
 
-And then type ``./VstHostSwitcher-Build.ps1`` and press the ENTER key:
+And then type ``./VstHostSwitcher-Build.ps1`` and press the ENTER key:  
 ![PowershellExe2-Image](images/PowershellExe2.png)
 
-Or type ``powershell "./VstHostSwitcher-Build.ps1"`` from s asimple DOS / cmd.exe window like this:
+Or type ``powershell "./VstHostSwitcher-Build.ps1"`` and press the ENTER key from a simple DOS / cmd.exe window like this:  
 ![PowershellExe3-Image](images/PowershellExe3.png)
 
 Now you just have to chooose a folder location to install/store the executable.  
-I personnally added it to the folder containing all my VST host applications but you could copy it anywhere else. Please simply keep in mind its path location in order to be able to easily retrieve it later on when associating the ``.dll`` file extension with the ``VstHostSwitcher.exe`` executable as explained in the next topic.
+I personnally added it to the folder containing all my VST host applications but you could copy it anywhere else.  
+Please simply keep in mind this path location in order to be able to easily retrieve it later on when associating the ``.dll`` file extension with the ``VstHostSwitcher.exe`` executable as explained in the next topic.
 
 <a name="ANCHOR_FILE_ASSOCIATION"></a>
 
