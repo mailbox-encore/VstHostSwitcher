@@ -12,6 +12,8 @@ If you have both x86 and x64 version of VST plugins and you do not always need t
 
 The problem is that 32 bits VST plugins cannot be open with a 64 bits VST host and vice versa. Therfore, the idea was to create an executable which could do the 32/64 bits VST host switching automatically for me and associate it with the ``.dll`` files extension in the MS Windows file explorer. This way, simply by double clicking any ``vst.dll`` file I could quickly open it in my preferred VST host **independently to the fact that the .dll file is a 32 or 64 bit VST Plugin**.
 
+![VstHostSwitcher-animated-Image](images/VstHostSwitcher.gif)
+
 In order to do this I needed:
 
 - [A script containing the logic to choose between the 32 or 64 bits VST host.](#ANCHOR_SCRIPTS)
