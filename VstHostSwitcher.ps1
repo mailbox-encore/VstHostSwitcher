@@ -22,7 +22,7 @@ if ($Debug) {
   #$arguments = "E:\Vstplugins\U-HE\ACE.dlna"
   }
   Write-Verbose "arguments=[$arguments]"
-  $applicationExePath="E:\Hosts\VstHostSwitcher"
+  $applicationExePath="E:\Dev\Workspace\VstHostSwitcher"
   if (!(Test-Path $applicationExePath)) {
     # USE current location during development
     $applicationExePath=Get-Location
@@ -102,58 +102,76 @@ if (!$arguments -or !$arguments.EndsWith(".dll")) {
 
 
 # Variables initialisations....
+$vstPluginsPath_x86ArrayList= New-Object System.Collections.ArrayList
+
 # 1) Try first to check if there is an ini file with custom entries...
 $iniFilePath="$applicationExePath\VstHostSwitcher.ini"
 if (Test-Path $iniFilePath) {
   # yes ! use custom definitions
   $vstHostSwitcherIniFile = Get-IniContent  $iniFilePath
-  $vstPluginsPath_x86= $vstHostSwitcherIniFile.VstPluginFolderPaths.x86
-  $vstPluginsPath_x64= $vstHostSwitcherIniFile.VstPluginFolderPaths.x64
-  # TODO handle the preferred path here
-  $preferred=$vstHostSwitcherIniFile.VstHostApplicationsPaths.preferred
-  if (!$preferred) {
-    $preferred=Path1
+ 
+  # Read ALL defined x86VstPluginFolderPaths and store them in an Arraylist
+  $i = 0
+  do {
+    $i++
+    $vstPluginsPath=$vstHostSwitcherIniFile.x86VstPluginFolderPaths["Path$i"]
+    if ($vstPluginsPath) { 
+      $vstPluginsPath_x86ArrayList.Add($vstPluginsPath)
+    }
+  } until(!$vstPluginsPath)
+  
+  # TODO handle the preferredPath path here
+  $preferredPath=$vstHostSwitcherIniFile.VstHostApplicationsPaths.preferredPath
+  if (!$preferredPath) {
+    $preferredPath=1
   }
-  $vstHostApplicationsPaths_x86 = $vstHostSwitcherIniFile.VstHostApplicationsPaths["x86$preferred"]
-  $vstHostApplicationsPaths_x64 = $vstHostSwitcherIniFile.VstHostApplicationsPaths["x64$preferred"]
+  $vstHostApplicationsPaths_x86 = $vstHostSwitcherIniFile.VstHostApplicationsPaths["x86Path$preferredPath"]
+  $vstHostApplicationsPaths_x64 = $vstHostSwitcherIniFile.VstHostApplicationsPaths["x64Path$preferredPath"]
 }else{
   Write-Error  "Cannot found: $iniFilePath"
 }
+
+# 2) Check if variables were defined in the VstHostSwitcher.ini file values 
+# => otherwise use default values
+# Try to retrieve the x86 VstPlugins path from the registry 
+if ($vstPluginsPath_x86ArrayList.Count -eq 0) {
+  $vstPluginsPath=(Get-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\VST -Name "VSTPluginsPath").VSTPluginsPath
+  if ($vstPluginsPath) { 
+    $vstPluginsPath_x86ArrayList.add($vstPluginsPath)
+  }
+}
+# use default x86 VstPlugins path if neither defined in the .ini file nor in the registry 
+if ($vstPluginsPath_x86ArrayList.Count -eq 0) {
+  $vstPluginsPath_x86ArrayList.add("C:\Program Files (x86)\Steinberg\VstPlugins\")
+}
+Write-Verbose "vstPluginsPath_x86=$vstPluginsPath_x86ArrayList"
+
+# Use default values for vstHostApplicationsPaths
 if (!$vstHostApplicationsPaths_x86) {
   # No... Use default values if the .ini file is not existing this works ony for me ;o)
   $vstHostApplicationsPaths_x86 ="E:\Hosts\Tone2 - NanoHost\NanoHost32bit.exe"
 }
+Write-Verbose "vstHostApplicationsPaths_x86=$vstHostApplicationsPaths_x86"
 if (!$vstHostApplicationsPaths_x64) {
   # No... Use default values if the .ini file is not existing this works ony for me ;o)
   $vstHostApplicationsPaths_x64 ="E:\Hosts\Tone2 - NanoHost\NanoHost64bit.exe"
 }
-Write-Verbose "vstHostApplicationsPaths_x86=$vstHostApplicationsPaths_x86"
 Write-Verbose "vstHostApplicationsPaths_x64=$vstHostApplicationsPaths_x64"
 
-# 2) Try to retrieve the x86 VstPlugins path from the registry 
-# if it was not defined in the .ini file
-if (!$vstPluginsPath_x86) {
-  $vstPluginsPath_x86 = (Get-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\VST -Name "VSTPluginsPath").VSTPluginsPath
+Write-Host "debug 1" 
+# Function to check if the script arguments are potentially containing a x86 VST plugin path 
+# => otherwise the VST plugin dll argument will be sonsidered as a x64 one.
+function IsX86VstPluginPath(){
+    foreach ($vstPluginsPath_x86 in $vstPluginsPath_x86ArrayList){
+      if ($arguments.StartsWith($vstPluginsPath_x86, $true, $null)){
+        return $true
+      }
+    }
+    return $false
 }
-# use default x86 VstPlugins path if not defined in registry neither
-if (!$vstPluginsPath_x86) {
-  $vstPluginsPath_x86 = "C:\Program Files (x86)\Steinberg\VstPlugins\"
-}
-Write-Verbose "vstPluginsPath_x86=$vstPluginsPath_x86"
-
-# try to retrieve the x64 VST plugins path from the registry 
-# if it was not defined in the .ini file
-if (!$vstPluginsPath_x64) {
-  $vstPluginsPath_x64 = (Get-ItemProperty -Path HKLM:\SOFTWARE\VST -Name "VSTPluginsPath").VSTPluginsPath
-}
-# use default x64 VstPlugins path if not defined in registry neither
-if (!$vstPluginsPath_x64) {
-  $vstPluginsPath_x64 = "C:\Program Files\Steinberg\VstPlugins\"
-}
-Write-Verbose "vstPluginsPath_x64=$vstPluginsPath_x64"
-
+Write-Host "debug 2" 
 # 3) Do the VST Host application switching work here...
-if ($arguments.StartsWith($vstPluginsPath_x86, $true, $null)) {
+if (IsX86VstPluginPath) {
   Write-Verbose "Launching x86 VST host using [$vstHostApplicationsPaths_x86] application."
   & $vstHostApplicationsPaths_x86 $arguments
 }
