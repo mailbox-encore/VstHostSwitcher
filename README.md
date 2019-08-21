@@ -108,7 +108,7 @@ You can launch this script using the PowerShell window like this:
 And then type ``./VstHostSwitcher-Build.ps1`` and press the ENTER key:  
 ![PowershellExe2-Image](images/PowershellExe2.png)
 
-Or type ``powershell "./VstHostSwitcher-Build.ps1"`` and press the ENTER key from a simple DOS / cmd.exe window like this:  
+Alternatively you can also open a simple DOS / cmd.exe window like the one below,  type ``powershell "./VstHostSwitcher-Build.ps1"`` and press the ENTER key:  
 ![PowershellExe3-Image](images/PowershellExe3.png)
 
 Now you just have to chooose a folder location to install/store the executable.  
@@ -119,12 +119,12 @@ Please simply keep in mind this path location in order to be able to easily retr
 
 ## Associating the VstHostSwitcher.exe executable with .dll file extension
 
-Since we have built the ``VstHostSwitcher.exe`` executable we have now to **associate it with the VST.dll file extension**.
-Even if I agree that not all ``.dll`` files are VST plugins rhis is the only way I found to easily open a VST upon a double click.  
-Here is how to do it from the MS Widnows file explorer:
+Since we have built the ``VstHostSwitcher.exe`` executable we have now to **associate it with the VST.dll file extension**.  
+Even if I agree that not all ``.dll`` files are VST plugins this is the only way I found to easily open a VST upon a double click.  
+Here is how to do it from the MS Windows file explorer:
 
 ![DllFileExtensionAssociation-Image](images/DllFileExtensionAssociation.png)
 
-If everything went well, the selected VST ``.dll`` file during the file association should open.
+If everything went well, the previously selected VST ``.dll`` file (during the file association process) should open.
 
 Hope this help...
