@@ -120,7 +120,7 @@ if (Test-Path $iniFilePath) {
     }
   } until(!$vstPluginsPath)
   
-  # TODO handle the preferredPath path here
+  # TODO handle the preferredPath variable here
   $preferredPath=$vstHostSwitcherIniFile.VstHostApplicationsPaths.preferredPath
   if (!$preferredPath) {
     $preferredPath=1
