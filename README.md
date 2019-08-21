@@ -24,8 +24,7 @@ In order to do this I needed:
 
 ## Why two .ps1  script files
 
-The ``VstHostSwitcher-Build.ps1`` script is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable.  
-I will give more details about the use of this script to build an executable [later on at the end of this page](#ANCHOR_EXE).  
+The ``VstHostSwitcher-Build.ps1`` script is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable. I will give more details about the use of this script to build an executable [later on at the end of this page](#ANCHOR_EXE).  
 
 The ``VstHostSwitcher.ps1`` script is containing all the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.  
 
@@ -34,11 +33,10 @@ Please edit the ``$applicationExePath`` variable at line 10 of the ``VstHostSwit
 ![Important-Warning-Image](images/Important-Warning.png)
 
 This ``$applicationExePath`` variable will contain the folder path where you will store the ``VstHostSwitcher.exe`` executable and its associated ``VstHostSwitcher.ini`` file. If this variable is not set, the ``VstHostSwitcher.exe`` executable file won't be able to found the ``VstHostSwitcher.ini``.  
-In the sample below I have deployed / copied these two files in the ``E:\Hosts\VstHostSwitcher`` folder:
-
+In the example below I have deployed / copied these two files in the ``E:\Hosts\VstHostSwitcher`` folder:
 ![ExeApplicationPath-Image](images/ExeApplicationPath.png)
 
-The _current script location_ cannot be guessed/used at runtime as this script location is unfortunately replaced by the VST plugin ``.dll`` file location given as argument. I could not found a way to fix this. Therefore any sugestions will be greatly appreciated. Thanks in advance for any help.  
+The _current script location_ cannot be guessed/used at runtime as this script location is unfortunately replaced by the VST plugin ``.dll`` file location given as argument to the script. I could not found a way to fix this, therefore any sugestions will be greatly appreciated. Thanks in advance for any help.  
 
 <a name="ANCHOR_SETTINGS"></a>
 
