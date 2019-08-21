@@ -26,7 +26,8 @@ In order to do this I needed:
 ## Why two .ps1  script files
 
 The ``VstHostSwitcher.ps1`` script is containing the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.  
-The second script (``VstHostSwitcher-Build.ps1``) is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable. Please see the [Building an executable with the scripts section](#ANCHOR_EXE) at the end of this file for more details.
+The second script (``VstHostSwitcher-Build.ps1``) is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable.  
+Please see the [Building an executable with the scripts section](#ANCHOR_EXE) topic at the end of this page for more details.
 
 **IMPORTANT**  
 Please edit the ``$applicationExePath`` variable at line 10 of the ``VstHostSwitcher.ps1`` script to set the path location where you will copy/install the ``VstHostSwitcher-Build.exe`` executable built from the script.
@@ -80,8 +81,8 @@ Notice that if no VST HOST application path is defined, the script will use the 
 - E:\Hosts\Tone2 - NanoHost\NanoHost32bit.exe
 - E:\Hosts\Tone2 - NanoHost\NanoHost64bit.exe
 
-...THese path entries will work obviously only if these path are existing on your machine... which I doubt.  
-Therefore, I am strongly advising you to fill the ``VstHostSwitcher.ini`` file with **your own path entries**... ;o)
+These path entries will work obviously only if they are existing on your machine... which I doubt ;o)  
+Therefore, I am strongly advising you to fill the ``VstHostSwitcher.ini`` file with **your own path entries**...
 
 <a name="ANCHOR_EXE"></a>
 
@@ -91,15 +92,15 @@ Now that we have updated the ``VstHostSwitcher.ini`` file with our own settings,
 We will need the **ps2exe script** that you can [download here](https://gallery.technet.microsoft.com/scriptcenter/PS2EXE-GUI-Convert-9b4b0493) for this task.
 
 Once you have downloaded and extracted the zip file (i.e. for me in the _E:\Dev\Tools\PS2EXE_ directory) I am advising you to add the folder location where you unzip the file to your PATH environment variable. This way, you can simply run the ``VstHostSwitcher-Build.ps1`` script without having to modify it.  
-Here is how to do so from the MS Windows file explorer:
 
+Here is how to do so from the MS Windows file explorer:
 ![SetEnv-Image](images/SetEnv.png)
 
 Alternatively, you can also simply prefix the ``ps2exe.ps1`` string with the path to the ``ps2exe.ps1`` script location in the ``VstHostSwitcher-Build.ps1`` script like in this example with the _E:\Dev\Tools\PS2EXE_ path as it is the place where I installed it:  
 > ``E:\Dev\Tools\PS2EXE\ps2exe.ps1 VstHostSwitcher.ps1 VstHostSwitcher.exe -verbose -noConsole -iconfile VstHostSwitcher.ico``
 
 Notice that you can also specify your own personal icon file name if needed using the ``-iconfile`` argument.  
-I found [the one I am using here](https://icon-icons.com/)...
+I found the one I am using in the above command line example [here](https://icon-icons.com/)...
 
 Then, simply run the ``VstHostSwitcher-Build.ps1`` script to create the ``VstHostSwitcher.exe`` executable file.  
 You can launch this script using the PowerShell window like this:  
@@ -111,8 +112,9 @@ And then type ``./VstHostSwitcher-Build.ps1`` and press the ENTER key:
 Alternatively you can also open a simple DOS / cmd.exe window like the one below,  type ``powershell "./VstHostSwitcher-Build.ps1"`` and press the ENTER key:  
 ![PowershellExe3-Image](images/PowershellExe3.png)
 
-Now you just have to chooose a folder location to install/store the executable.  
-I personnally added it to the folder containing all my VST host applications but you could copy it anywhere else.  
+Now you just have to chooose a folder location to install/store the executable. I personnally added it to the folder containing all my VST host applications but you could copy/install it anywhere else:  
+![ExeLocation-Image](images/ExeLocation.png)
+
 Please simply keep in mind this path location in order to be able to easily retrieve it later on when associating the ``.dll`` file extension with the ``VstHostSwitcher.exe`` executable as explained in the next topic.
 
 <a name="ANCHOR_FILE_ASSOCIATION"></a>
@@ -121,8 +123,8 @@ Please simply keep in mind this path location in order to be able to easily retr
 
 Since we have built the ``VstHostSwitcher.exe`` executable we have now to **associate it with the VST.dll file extension**.  
 Even if I agree that not all ``.dll`` files are VST plugins this is the only way I found to easily open a VST upon a double click.  
-Here is how to do it from the MS Windows file explorer:
 
+Here is how to do it from the MS Windows file explorer:
 ![DllFileExtensionAssociation-Image](images/DllFileExtensionAssociation.png)
 
 If everything went well, the previously selected VST ``.dll`` file (during the file association process) should open.
