@@ -55,10 +55,9 @@ The ``VstHostSwitcher.ini`` file has the following structure:
 > Path2=\[enter your second x86 VST plugins path here\]  
 > ...etc
 
-You can defined here any number of entries they will all be checked when a VST plugin .dll fill will be given as program argument.  
-You need to enter only x86 plugin paths bacause if the given .dll file is not 'detected' as a x86 VST plugin I will assume that it is a x64 and use the x64 VST host application path to launch it.  
+You can defined here any number of entries. They will all be checked when a VST plugin .dll file will be given as program argument. You need to enter only x86 plugin paths because if the given .dll file is not 'detected' as a x86 VST plugin the script will assume that it is a x64 one and will then use the x64 VST host application to load the .dll file.  
 
- Notice that if no VST plugins folder path is defined, the script will try to get it from the [MS Windows registry](https://en.wikipedia.org/wiki/Windows_Registry) or use the following default path location which is probably your current default location:  
+ Notice that if no VST plugins folder path is defined, the script will also try to retrieve it from the [MS Windows registry](https://en.wikipedia.org/wiki/Windows_Registry) or use the following default path location which is probably your current default location:  
 
 - C:\Program Files (x86)\Steinberg\VstPlugins\
 
@@ -72,16 +71,15 @@ You need to enter only x86 plugin paths bacause if the given .dll file is not 'd
 > x64Path2=\[enter your second x64 VST HOST path here\]  
 > ...etc
 
-You can enter several pairs (x86 + x64) of VST host paths and specify your preferred one using the optionnal _preferredPath_ key.  
-If the _preferredPath_ key is not specified, the script will use the first pair of paths as default.
+You can enter several pairs (x86 + x64) of VST host paths and specify your preferred one using the optionnal _preferredPath_ key. If the _preferredPath_ key is not specified, the script will use the _xNNPath1_ pair of paths as default.
 
 Notice that if no VST HOST application path is defined, the script will use the following default values respectively for the x86 and x64 default VST Host application path location:
 
 - E:\Hosts\Tone2 - NanoHost\NanoHost32bit.exe
 - E:\Hosts\Tone2 - NanoHost\NanoHost64bit.exe
 
-These path entries will work obviously only if they are existing on your machine... ;o)
-Therefore, I am strongly advising you to fill the ``VstHostSwitcher.ini`` file with **your own** path entries.
+These path entries will obviously only work if they are existing on your machine... ;o)
+Therefore, I am strongly advising you to fill properly the ``VstHostSwitcher.ini`` file with **your own** path entries.
 
 <a name="ANCHOR_EXE"></a>
 
