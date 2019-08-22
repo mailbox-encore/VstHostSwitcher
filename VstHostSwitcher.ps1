@@ -8,18 +8,16 @@
 # VST .dll file and therfore the .ini file could not be found.
 #############################################################################################
 $applicationExePath="Enter the full path to VstSwitcher.exe here please"
-#$applicationExePath="E:\Hosts\VstHostSwitcher"
-# Uncomment the following line to debug 
+# $applicationExePath="E:\Hosts\VstHostSwitcher"
+
+# Uncomment the following line to switch to 'debug' mode to test this script 
+# withouts having to associate it to a .dll file
 #$Debug=$true
 if ($Debug) {
   $VerbosePreference = "Continue" 
   if (!$arguments){
-  #$arguments = "E:\VstPlugins\U-HE\ACE.dll"
-  #$arguments="E:\VstPlugins.x64\U-HE\ACE(x64).dll"
- 
-  $arguments = "E:\Vstplugins\Obxd.dll"
-  #$arguments = "E:\Vstplugins.x64\Boost11\Boost11_64.dll"
-  #$arguments = "E:\Vstplugins\U-HE\ACE.dlna"
+    $arguments = "E:\Vstplugins\Obxd.dll"
+    #$arguments = "E:\Vstplugins.x64\Boost11\Boost11_64.dll"
   }
   Write-Verbose "arguments=[$arguments]"
   $applicationExePath="E:\Dev\Workspace\VstHostSwitcher"
@@ -41,67 +39,67 @@ if (!$arguments -or !$arguments.EndsWith(".dll")) {
   Exit
 }
 
-# Utility functions to parse .ini  files
-  # https://gallery.technet.microsoft.com/scriptcenter/ea40c1ef-c856-434b-b8fb-ebd7a76e8d91
-  Function Get-IniContent {  
-    [CmdletBinding()]  
-    Param(  
-        [ValidateNotNullOrEmpty()]  
-        [ValidateScript({(Test-Path $_) -and ((Get-Item $_).Extension -eq ".ini")})]  
-        [Parameter(ValueFromPipeline=$True,Mandatory=$True)]  
-        [string]$FilePath  
-    )  
-      
-    Begin  
-        {Write-Verbose "$($MyInvocation.MyCommand.Name):: Function started"}  
-          
-    Process  
-    {  
-        Write-Verbose "$($MyInvocation.MyCommand.Name):: Processing file: $Filepath"  
-              
-        $ini = @{}  
-        switch -regex -file $FilePath  
-        {  
-            "^\[(.+)\]$" # Section  
-            {  
-                $section = $matches[1]  
-                $ini[$section] = @{}  
-                $CommentCount = 0  
-            }  
-            "^(;.*)$" # Comment  
-            {  
-                if (!($section))  
-                {  
-                    $section = "No-Section"  
-                    $ini[$section] = @{}  
-                }  
-                $value = $matches[1]  
-                $CommentCount = $CommentCount + 1  
-                $name = "Comment" + $CommentCount  
-                $ini[$section][$name] = $value  
-            }   
-            "(.+?)\s*=\s*(.*)" # Key  
-            {  
-                if (!($section))  
-                {  
-                    $section = "No-Section"  
-                    $ini[$section] = @{}  
-                }  
-                $name,$value = $matches[1..2]  
-                $ini[$section][$name] = $value  
-            }  
-        }  
-        Write-Verbose "$($MyInvocation.MyCommand.Name):: Finished Processing file: $FilePath"  
-        Return $ini  
-    }  
-          
-    End  
-        {Write-Verbose "$($MyInvocation.MyCommand.Name):: Function ended"}  
+# Utility functions to parse .ini files found here:
+# https://gallery.technet.microsoft.com/scriptcenter/ea40c1ef-c856-434b-b8fb-ebd7a76e8d91
+Function Get-IniContent {  
+  [CmdletBinding()]  
+  Param(  
+      [ValidateNotNullOrEmpty()]  
+      [ValidateScript({(Test-Path $_) -and ((Get-Item $_).Extension -eq ".ini")})]  
+      [Parameter(ValueFromPipeline=$True,Mandatory=$True)]  
+      [string]$FilePath  
+  )  
+    
+  Begin  
+      {Write-Verbose "$($MyInvocation.MyCommand.Name):: Function started"}  
+        
+  Process  
+  {  
+      Write-Verbose "$($MyInvocation.MyCommand.Name):: Processing file: $Filepath"  
+            
+      $ini = @{}  
+      switch -regex -file $FilePath  
+      {  
+          "^\[(.+)\]$" # Section  
+          {  
+              $section = $matches[1]  
+              $ini[$section] = @{}  
+              $CommentCount = 0  
+          }  
+          "^(;.*)$" # Comment  
+          {  
+              if (!($section))  
+              {  
+                  $section = "No-Section"  
+                  $ini[$section] = @{}  
+              }  
+              $value = $matches[1]  
+              $CommentCount = $CommentCount + 1  
+              $name = "Comment" + $CommentCount  
+              $ini[$section][$name] = $value  
+          }   
+          "(.+?)\s*=\s*(.*)" # Key  
+          {  
+              if (!($section))  
+              {  
+                  $section = "No-Section"  
+                  $ini[$section] = @{}  
+              }  
+              $name,$value = $matches[1..2]  
+              $ini[$section][$name] = $value  
+          }  
+      }  
+      Write-Verbose "$($MyInvocation.MyCommand.Name):: Finished Processing file: $FilePath"  
+      Return $ini  
+  }  
+        
+  End  
+      {Write-Verbose "$($MyInvocation.MyCommand.Name):: Function ended"}  
 }
 
-
-
-# Variables initialisations....
+#########################################
+# Variables initialisations START....
+#########################################
 $vstPluginsPath_x86ArrayList= New-Object System.Collections.ArrayList
 
 # 1) Try first to check if there is an ini file with custom entries...
@@ -116,7 +114,7 @@ if (Test-Path $iniFilePath) {
     $i++
     $vstPluginsPath=$vstHostSwitcherIniFile.x86VstPluginFolderPaths["Path$i"]
     if ($vstPluginsPath) { 
-      $vstPluginsPath_x86ArrayList.Add($vstPluginsPath)
+      [void]$vstPluginsPath_x86ArrayList.Add($vstPluginsPath)
     }
   } until(!$vstPluginsPath)
   
@@ -158,7 +156,6 @@ if (!$vstHostApplicationsPaths_x64) {
 }
 Write-Verbose "vstHostApplicationsPaths_x64=$vstHostApplicationsPaths_x64"
 
-Write-Host "debug 1" 
 # Function to check if the script arguments are potentially containing a x86 VST plugin path 
 # => otherwise the VST plugin dll argument will be sonsidered as a x64 one.
 function IsX86VstPluginPath(){
@@ -169,7 +166,11 @@ function IsX86VstPluginPath(){
     }
     return $false
 }
-Write-Host "debug 2" 
+
+#########################################
+# Variables initialisations END....
+#########################################
+
 # 3) Do the VST Host application switching work here...
 if (IsX86VstPluginPath) {
   Write-Verbose "Launching x86 VST host using [$vstHostApplicationsPaths_x86] application."
