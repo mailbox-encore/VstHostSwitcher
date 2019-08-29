@@ -1,21 +1,21 @@
 # VstHostSwitcher
 
-Version française [ici](./LISEZMOI.md)
+English version [here](./README.md)
 
 ## Description
 
-The purpose of these small [PowerShell scripts](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) is to simplify the automatic switching between 32 and 64 bits VST plugins hosts applications  installed on my MS Windows PC.
+Le but de ces petits [scripts PowerShell](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) est de simplifier le basculement automatique entre des application host de VST plugins 32 et 64 bits installés sur mon PC sous MS Windows.
 
-If you have both x86 and x64 version of VST plugins and you do not always need to launch a 'heavy' DAW to open them and do some 'knob tweaking' to create new sound presets, you may already use a VST plugin host application like the followings ones:
+Si vous avez a la fois des version x86 et x64 de plugins VST et que vous n'avez pas toujours besoin d'ouvrir votre DAW pour simplement creer de nouveaux presets de sons, vous utilisez probablement déja un des host VST ci-dessous:
 
 - [Tone 2 Nanohost](https://www.tone2.com/nanohost.html)
 - [Image-Line MiniHostModular](https://forum.image-line.com/viewtopic.php?f=1919&t=123031)
 - [Hermann Seib vsthost](http://www.hermannseib.com/english/vsthost.htm)
 
-The problem is that 32 bits VST plugins cannot be open with a 64 bits VST host and vice versa. Therfore, the idea was to create an executable which could do the 32/64 bits VST host application switching automatically for me and associate it with the ``.dll`` files extension in the MS Windows file explorer. This way, simply by double clicking any ``vst.dll`` file I could quickly open it in my preferred VST host **independently to the fact that the .dll file is a 32 or 64 bit VST Plugin**:
+Le probleme est que les plugins VST 32 bits ne peuvent être ouverts avec un host de VST en 64 bits VST host and vice versa. Par conséquent, l'idée était de créer un executable qui pourrait faire le basculement automatique pour moi entre le choix d'un host VST 32/64 bits et associer cet executable avec l'extension de fichier ``.dll`` depuis l'explorateur de fichier MS Windows. De cete façon, simplement en double cliquant n'importe quel fichier ``vst.dll`` je pourrai ouvril cette dll avec mon host de VST preferré **independamment du fait que le fichier .dll est une version 32 ou 64 bit de ce Plugin VST**:
 ![VstHostSwitcher-animated-Image](images/VstHostSwitcher.gif)
 
-In order to do this I needed:
+Afin d'arriver à cela j'ai besoin des étapes suivantes:
 
 - [A script containing the logic to choose between the 32 or 64 bits VST host.](#ANCHOR_SCRIPTS)
 - [A way to specify custom PATH settings](#ANCHOR_SETTINGS)
@@ -134,6 +134,6 @@ If everything went well, the previously selected VST ``.dll`` file (during the f
 
 Hope this help...
 
-## Hmmm... I am not using MS Windows, can I use your scripts
+## Hmmm... I am not using MS Windows can I use your scripts
 
 I think that PowerShell scripts can be adapted and executed to run on other OS ([LINUX](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6) &  [MAC](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-6)) but I have no idea then how to build an executable for these platforms from a PowerSell script and how to associate the ``.dll`` equivalent ([.vst / .vst3 ?](https://helpcenter.steinberg.de/hc/en-us/articles/115000171310-VST-plug-in-locations-on-Mac-OS-X-and-macOS)) for MAC or Linux unfortunately.
