@@ -1,10 +1,10 @@
 # VstHostSwitcher
 
-Version française [ici](./LISEZMOI.md)
+Veuillez trouver la version française de ce document [ici](./LISEZMOI.md)
 
 ## Description
 
-The purpose of these small [PowerShell scripts](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) is to simplify the automatic switching between 32 and 64 bits VST plugins hosts applications  installed on my MS Windows PC.
+The purpose of these small [PowerShell scripts](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-6) is to simplify the AUTOMATIC switching between 32 and 64 bits VST plugins hosts applications  installed on my MS Windows PC.
 
 If you have both x86 and x64 version of VST plugins and you do not always need to launch a 'heavy' DAW to open them and do some 'knob tweaking' to create new sound presets, you may already use a VST plugin host application like the followings ones:
 
@@ -26,7 +26,7 @@ In order to do this I needed:
 
 ## Why two .ps1  script files
 
-The ``VstHostSwitcher-Build.ps1`` script is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to an executable. I will give more details about the use of this script to build an executable [later on at the end of this page](#ANCHOR_EXE).  
+The ``VstHostSwitcher-Build.ps1`` script is provided as an example file to easily **build** the ``VstHostSwitcher.ps1`` file to a MS Windows executable. I will give more details about the use of this script to build an executable [later on at the end of this page](#ANCHOR_EXE).  
 
 The ``VstHostSwitcher.ps1`` script is containing all the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.  
 
@@ -76,7 +76,7 @@ You can defined here any number of VST plugin path location entries here. They w
 > ...etc
 
 You can enter several pairs (x86 + x64) of VST host paths and specify your preferred one using the optionnal _preferredPath_ key. This will allow you to switch easily from one VST host to the other in case you need to tests something or a VST plugin is not fully _supported_ by a VST host application.  
-If the _preferredPath_ key is not specified, the script will use the _xNNPath1_ pair of paths as default.
+If the _preferredPath_ key is not specified, the script will use the _x##Path?_ pair of paths as default.
 
 If no VST HOST application path is defined, the script will use the following default values respectively for the x86 and x64 default VST Host application path location:
 
