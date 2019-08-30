@@ -30,6 +30,8 @@ The ``VstHostSwitcher-Build.ps1`` script is provided as an example file to easil
 
 The ``VstHostSwitcher.ps1`` script is containing all the logic to _guess_ if the ``path-to-the-vst-dl-to-launch`` is a 32 or 64 bits directory.  
 
+<a name="ANCHOR_IMPORTANT_PATH"></a>
+
 **IMPORTANT**  
 Please edit the ``$applicationExePath`` variable at line 10 of the ``VstHostSwitcher.ps1`` script to set the path location where you will copy/install the ``VstHostSwitcher-Build.exe`` executable built from the script.
 ![Important-Warning-Image](images/Important-Warning.png)
@@ -112,7 +114,7 @@ And then type ``./VstHostSwitcher-Build.ps1`` and press the _ENTER_ key:
 Alternatively you can also open a simple DOS / cmd.exe window like the one below,  type ``powershell "./VstHostSwitcher-Build.ps1"`` and press the _ENTER_ key:  
 ![PowershellExe3-Image](images/PowershellExe3.png)
 
-Now you just have to chooose a folder location where to install/store the built executable. I personnally added it to the folder containing all my VST host applications but you could copy/install it anywhere else:  
+You have now to install this ``VstHostSwitcher.exe`` executable in the same folder that you had chosen at the beginning of this document when éditing the script (c.f. [IMPORTANT](#ANCHOR_IMPORTANT_PATH) point):  
 ![ExeLocation-Image](images/ExeLocation.png)
 
 Please simply keep in mind this path location in order to be able to easily retrieve it later on when associating the ``.dll`` file extension with the ``VstHostSwitcher.exe`` executable as explained in the next topic.
