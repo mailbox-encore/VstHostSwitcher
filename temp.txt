@@ -1,0 +1,15 @@
+https://superuser.com/questions/106360/how-to-enable-execution-of-powershell-scripts
+
+Start Windows PowerShell with the "Run as Administrator" option. 
+Only members of the Administrators group on the computer can change the execution policy.
+Enable running unsigned scripts by entering:
+set-executionpolicy remotesigned
+
+The Default Execution Policy is set to restricted, you can see it by typing:
+Get-ExecutionPolicy
+
+You should type the following to make it go to unrestricted mode:
+Set-ExecutionPolicy unrestricted
+
+
+https://code.visualstudio.com/docs/editor/debugging
